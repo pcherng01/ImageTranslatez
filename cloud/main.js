@@ -36,7 +36,7 @@ Parse.Cloud.define("getPhoto", function(request, response) {
                             break;
                         rText += text[i];
                     }
-                    response.success(str(1, rText.length - 2));
+                    response.success(rText.substr(1, rText.length - 2));
                 }
                 response.success("N/A");
                 results[0].destroy({});
