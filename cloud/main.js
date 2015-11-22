@@ -10,7 +10,24 @@ var object;
 // Defines a method getPhotoData to use the IBM alchemy API.
 // This returns a description of the photo in a json format.
 
-Parse.Cloud.define("getPhotoData", function(request, response) {
+Parse.Cloud.define("getPhoto", function(request, response) {
+    var photo = Parse.Object.extend("PhotoObject");
+    var query = new Parse.Query(photo);
+
+    query.equalTo("ImageKey", "ImageFile");
+    query.find({
+        success: function(results) {
+            //response.success("Successfully retrieved " + results.length);
+            object = results[0];
+            img = object.get("image").url();
+            //document.getElementById('picture').src = img;
+            response.success("Successfully retrieved " + results.length + ".\n" + img);
+
+        },
+        error: function(error) {
+            console.error("Query Unsuccessful");
+        }
+    });
     Parse.Cloud.httpRequest({
         url: "http://gateway-a.watsonplatform.net/calls/image/ImageGetRankedImageKeywords",
         method: "POST",
@@ -45,23 +62,7 @@ Parse.Cloud.define("getPhotoData", function(request, response) {
 // Defines a method getPhoto to get a photo that is saved in to the
 // parse database.
 
-Parse.Cloud.define("getPhoto", function(request, response) {
-    var photo = Parse.Object.extend("PhotoObject");
-    var query = new Parse.Query(photo);
+Parse.Cloud.define("getPhotoData", function(request, response) {
 
-    query.equalTo("ImageKey", "ImageFile");
-    query.find({
-        success: function(results) {
-            //response.success("Successfully retrieved " + results.length);
-            object = results[0];
-            img = object.get("image").url();
-            //document.getElementById('picture').src = img;
-            response.success("Successfully retrieved " + results.length + ".\n" + img);
-
-        },
-        error: function(error) {
-            console.error("Query Unsuccessful");
-        }
-    });
 
 });
