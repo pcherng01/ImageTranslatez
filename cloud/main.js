@@ -87,13 +87,13 @@ Parse.Cloud.define("getTranslateArabic", function(request, response) {
     query.find({
         success: function(results) {
             var object = results[0];
-            var word = object.get("identity").text;
+            var word = object.get("identity");
             var cText;
             Parse.Cloud.httpRequest({
                 url: "https://87b03976-e50a-448f-b505-d681beea1a78:jlvuC1ye73L3@gateway.watsonplatform.net/language-translation/api/v2/translate",
                 method: "POST",
                 params: {
-                    text: "dog",
+                    text: word,
                     source: "en",
                     target: "ar"
                 }
@@ -121,13 +121,13 @@ Parse.Cloud.define("getTranslateSpanish", function(request, response) {
     query.find({
         success: function(results) {
             var object = results[0];
-            var word = object.get("identity").text;
+            var word = object.get("identity");
             var cText;
             Parse.Cloud.httpRequest({
                 url: "https://87b03976-e50a-448f-b505-d681beea1a78:jlvuC1ye73L3@gateway.watsonplatform.net/language-translation/api/v2/translate",
                 method: "POST",
                 params: {
-                    text: "dog",
+                    text: word,
                     source: "en",
                     target: "es"
                 }
@@ -155,13 +155,13 @@ Parse.Cloud.define("getTranslateFrench", function(request, response) {
     query.find({
         success: function(results) {
             var object = results[0];
-            var word = object.get("identity").text;
+            var word = object.get("identity");
             var cText;
             Parse.Cloud.httpRequest({
                 url: "https://87b03976-e50a-448f-b505-d681beea1a78:jlvuC1ye73L3@gateway.watsonplatform.net/language-translation/api/v2/translate",
                 method: "POST",
                 params: {
-                    text: "dog",
+                    text: word,
                     source: "en",
                     target: "fr"
                 }
@@ -189,13 +189,13 @@ Parse.Cloud.define("getTranslatePortugese", function(request, response) {
     query.find({
         success: function(results) {
             var object = results[0];
-            var word = object.get("identity").text;
+            var word = object.get("identity");
             var cText;
             Parse.Cloud.httpRequest({
                 url: "https://87b03976-e50a-448f-b505-d681beea1a78:jlvuC1ye73L3@gateway.watsonplatform.net/language-translation/api/v2/translate",
                 method: "POST",
                 params: {
-                    text: "dog",
+                    text: word,
                     source: "en",
                     target: "pt"
                 }
