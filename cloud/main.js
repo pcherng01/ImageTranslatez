@@ -17,8 +17,22 @@ Parse.Cloud.define("hello", function(request, response) {
 // parse database.
 
 Parse.Cloud.define("getPhoto", function(request, response) {
+    var idObject = Parse.Object.extend("IdentityObj");
+    var query = new Parse.Query(idObject);
+    query.equalTo("idenKey", "idenValue");
+    query.find({
+        success: function(results) {
+            var object = results[0];
+            for (var i = 0; i < results.length; i++) {
+                results[i].destroy({});
+            }
+        },
+        error: function(error) {
+            console.error("Query Unsuccessful");
+        }
+    });
     var photo = Parse.Object.extend("PhotoObject");
-    var query = new Parse.Query(photo);
+    query = new Parse.Query(photo);
     query.equalTo("ImageKey", "ImageFile");
     query.find({
         success: function(results) {
