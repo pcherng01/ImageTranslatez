@@ -33,7 +33,7 @@ Parse.Cloud.define("getPhoto", function(request, response) {
                     outputMode: "json"
                 }
             }).then(function(httpResponse) {
-                var constText = '"text":'
+                var constText = '"text":';
                 var text = httpResponse.text.replace(/\s+/g, '');
                 var n = text.indexOf(constText);
                 if (n != -1) {
@@ -69,11 +69,11 @@ Parse.Cloud.define("getTranslate", function(request, response) {
 
     var idObject = Parse.Object.extend("IdentityObj");
     var query = new Parse.Query(idObject);
-    query.equalTo("Identity", "Object");
+    query.equalTo("idenKey", "idenVal");
     query.find({
         success: function(results) {
             var object = results[0];
-            var word = object.get("Identity").text;
+            var word = object.get("identity").text;
             Parse.Cloud.httpRequest({
                 username: '87b03976-e50a-448f-b505-d681beea1a78',
                 password: 'jlvuC1ye73L3',
