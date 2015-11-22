@@ -93,7 +93,7 @@ Parse.Cloud.define("getTranslateArabic", function(request, response) {
                 url: "https://87b03976-e50a-448f-b505-d681beea1a78:jlvuC1ye73L3@gateway.watsonplatform.net/language-translation/api/v2/translate",
                 method: "POST",
                 params: {
-                    text: word,
+                    text: "dog",
                     source: "en",
                     target: "ar"
                 }
@@ -127,7 +127,7 @@ Parse.Cloud.define("getTranslateSpanish", function(request, response) {
                 url: "https://87b03976-e50a-448f-b505-d681beea1a78:jlvuC1ye73L3@gateway.watsonplatform.net/language-translation/api/v2/translate",
                 method: "POST",
                 params: {
-                    text: word,
+                    text: "dog",
                     source: "en",
                     target: "es"
                 }
@@ -161,7 +161,7 @@ Parse.Cloud.define("getTranslateFrench", function(request, response) {
                 url: "https://87b03976-e50a-448f-b505-d681beea1a78:jlvuC1ye73L3@gateway.watsonplatform.net/language-translation/api/v2/translate",
                 method: "POST",
                 params: {
-                    text: word,
+                    text: "dog",
                     source: "en",
                     target: "fr"
                 }
@@ -195,7 +195,7 @@ Parse.Cloud.define("getTranslatePortugese", function(request, response) {
                 url: "https://87b03976-e50a-448f-b505-d681beea1a78:jlvuC1ye73L3@gateway.watsonplatform.net/language-translation/api/v2/translate",
                 method: "POST",
                 params: {
-                    text: word,
+                    text: "dog",
                     source: "en",
                     target: "pt"
                 }
