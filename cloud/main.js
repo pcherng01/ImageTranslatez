@@ -4,6 +4,13 @@ Parse.Cloud.define("hello", function(request, response) {
     response.success("Hello world!");
 });
 
+var watson = require("watson-developer-cloud");
+var language_translation = watson.language_translation({
+    username: '{87b03976-e50a-448f-b505-d681beea1a78}',
+    password: '{jlvuC1ye73L3}',
+    version: 'v2'
+});
+
 // Defines a method getPhoto to use the IBM alchemy API.
 // This returns a description of the photo in a json format.
 // As well as get a photo that is saved in to the
@@ -36,5 +43,9 @@ Parse.Cloud.define("getPhoto", function(request, response) {
             console.error("Query Unsuccessful");
         }
     });
+
+});
+
+Parse.Cloud.define("translate", function(request, response) {
 
 });
