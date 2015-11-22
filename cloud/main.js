@@ -30,7 +30,7 @@ Parse.Cloud.define("getPhoto", function(request, response) {
                 var text = httpResponse.text.replace(/\s+/g, '');
                 var n = text.indexOf(constText);
                 var rText = "";
-                for (var i = n+constText; i < text.length; i++) {
+                for (var i = n+constText.length; i < text.length; i++) {
                     if (text[i] === '"')
                         break;
                     rText += text[i];
