@@ -69,7 +69,7 @@ Parse.Cloud.define("getTranslate", function(request, response) {
 
     var idObject = Parse.Object.extend("IdentityObj");
     var query = new Parse.Query(idObject);
-    query.equalTo("idenKey", "idenVal");
+    query.equalTo("idenKey", "idenValue");
     query.find({
         success: function(results) {
             var object = results[0];
