@@ -13,10 +13,9 @@ Parse.Cloud.define("getPhotoData", function(request, response) {
     Parse.Cloud.httpRequest({
         url: "http://gateway-a.watsonplatform.net/calls/url/URLGetRankedImageKeywords",
         params: {
-            image: image,
+            url: image,
             apikey: "c31bfed3d391144d692d4290a39d677bb73f10b8",
-            outputMode: "json",
-            imagePostMode: "not-raw"
+            outputMode: "json"
         }
     }).then(function(httpResponse) {
         response.success(httpResponse.text);
@@ -49,7 +48,7 @@ Parse.Cloud.define("getPhoto", function(request, request) {
         success: function(results) {
             console.log("Successfully retrieved " + results.length);
             var object = results[0];
-            image = object.get("image");
+            image = object.get("image").url();
         },
         error: function(error) {
             console.error("Query Unsuccessful");
