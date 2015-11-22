@@ -82,21 +82,22 @@ Parse.Cloud.define("getTranslate", function(request, response) {
                     text: word,
                     source: "en",
                     target: "ar"
+                }
             }).then(function(httpResponse) {
                 var txt = httpResponse.text.replace(/\s+/g, '');
-                var constTxt = '"translation"';
-                var k = text.indexOf(constTxt);
-                cText = "";
-                for (var i = k + constTxt.length + 1; i < txt.length; i++) {
-                    if (txt[i] === '"')
-                        break;
-                    cText += txt[i];
-                }
-                response.success(cText);
+//                var constTxt = '"translation"';
+//                var k = txt.indexOf(constTxt);
+//                cText = "";
+//                for (var i = k + constTxt.length + 1; i < txt.length; i++) {
+//                    if (txt[i] === '"')
+//                        break;
+//                    cText += txt[i];
+//                }
+                response.success(txt);
             }, function(httpResponse) {
                 console.error('Request failed');
             });
-             response.success("yolo");
+            // response.success(");
         },
         error: function(error) {
             console.error("Query Unsuccessful");
