@@ -33,27 +33,121 @@ Parse.Cloud.define("getPhoto", function(request, response) {
                     outputMode: "json"
                 }
             }).then(function(httpResponse) {
-                var constText = '"text":'
-                var text = httpResponse.text.replace(/\s+/g, '');
-                var n = text.indexOf(constText);
-                var rText = "";
-                if (n != -1) {
-                    for (var i = n + constText.length+1; i < text.length; i++) {
-                        if (text[i] === '"')
-                            break;
-                        rText += text[i];
+                    var constText = '"text":'
+                    var text = httpResponse.text.replace(/\s+/g, '');
+                    var n = text.indexOf(constText);
+                    var rText = "";
+                    if (n != -1) {
+                        for (var i = n + constText.length + 1; i < text.length; i++) {
+                            if (text[i] === '"')
+                                break;
+                            rText += text[i];
+                        }
                     }
-                }
-                if (rText.length === 0) {
-                    rText = "N/A";
-                }
-                response.success(rText);
-                for(var i = 0; i < results.length; i++) {
-                    results[i].destroy({});
-                }
-            }, function(httpResponse) {
-                console.error('Request failed');
-            });
+                    if (rText.length === 0) {
+                        rText = "N/A";
+                    }
+
+                    if (rText === "N/A") {
+                        rText = rText + "," + rText + "," + rText + "," + rText + "," + rText;
+                    } else {
+                        language_translation.translate({
+                                text: rText,
+                                source: 'en',
+                                target: 'ar';
+                            },
+                            function(err, translation) {
+
+                                if (err)
+                                    console.log(err)
+                                else {
+                                    var txt = translation.text.replace(/\s+/g, '');
+                                    var constTxt = '"translation"';
+                                    var k = text.indexOf(constTxt);
+                                    var cText = "";
+                                    for (var i = k + constTxt.length + 1; i < txt.length; i++) {
+                                        if (txt[i] === '"')
+                                            break;
+                                        cText += txt[i];
+                                    }
+                                    rText = rText + "," + cText;
+                                }
+                            });
+                        language_translation.translate({
+                                text: rText,
+                                source: 'en',
+                                target: 'es';
+                            },
+                            function(err, translation) {
+
+                                if (err)
+                                    console.log(err)
+                                else {
+                                    var txt = translation.text.replace(/\s+/g, '');
+                                    var constTxt = '"translation"';
+                                    var k = text.indexOf(constTxt);
+                                    var cText = "";
+                                    for (var i = k + constTxt.length + 1; i < txt.length; i++) {
+                                        if (txt[i] === '"')
+                                            break;
+                                        cText += txt[i];
+                                    }
+                                    rText = rText + "," + cText;
+                                }
+                            });
+                        language_translation.translate({
+                                text: rText,
+                                source: 'en',
+                                target: 'fr';
+                            },
+                            function(err, translation) {
+
+                                if (err)
+                                    console.log(err)
+                                else {
+                                    var txt = translation.text.replace(/\s+/g, '');
+                                    var constTxt = '"translation"';
+                                    var k = text.indexOf(constTxt);
+                                    var cText = "";
+                                    for (var i = k + constTxt.length + 1; i < txt.length; i++) {
+                                        if (txt[i] === '"')
+                                            break;
+                                        cText += txt[i];
+                                    }
+                                    rText = rText + "," + cText;
+                                }
+                            });
+                        language_translation.translate({
+                                text: rText,
+                                source: 'en',
+                                target: 'pt';
+                            },
+                            function(err, translation) {
+
+                                if (err)
+                                    console.log(err)
+                                else {
+                                    var txt = translation.text.replace(/\s+/g, '');
+                                    var constTxt = '"translation"';
+                                    var k = text.indexOf(constTxt);
+                                    var cText = "";
+                                    for (var i = k + constTxt.length + 1; i < txt.length; i++) {
+                                        if (txt[i] === '"')
+                                            break;
+                                        cText += txt[i];
+                                    }
+                                    rText = rText + "," + cText;
+                                }
+                            });
+                    }
+                    response.success(rText);
+                    for (var i = 0; i < results.length; i++) {
+                        results[i].destroy({});
+                    }
+                },
+                function(httpResponse) {
+                    console.error('Request failed');
+                });
         },
         error: function(error) {
             console.error("Query Unsuccessful");
