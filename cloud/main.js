@@ -19,7 +19,7 @@ Parse.Cloud.define("hello", function(request, response) {
 Parse.Cloud.define("getPhoto", function(request, response) {
     var photo = Parse.Object.extend("PhotoObject");
     var query = new Parse.Query(photo);
-
+    var rText = "";
     query.equalTo("ImageKey", "ImageFile");
     query.find({
         success: function(results) {
@@ -36,7 +36,6 @@ Parse.Cloud.define("getPhoto", function(request, response) {
                     var constText = '"text":'
                     var text = httpResponse.text.replace(/\s+/g, '');
                     var n = text.indexOf(constText);
-                    var rText = "";
                     if (n != -1) {
                         for (var i = n + constText.length + 1; i < text.length; i++) {
                             if (text[i] === '"')
@@ -51,43 +50,41 @@ Parse.Cloud.define("getPhoto", function(request, response) {
                     if (rText === "N/A") {
                         rText = rText + "," + rText + "," + rText + "," + rText + "," + rText;
                     } else {
-                        Parse.Cloud.httpRequest({
-                            username: '87b03976-e50a-448f-b505-d681beea1a78',
-                            password: 'jlvuC1ye73L3',
-                            url: "https://gateway.watsonplatform.net/language-translation/api/v2/translate",
-                            method: "POST",
-                            params: {
-                                text: rText,
-                                source: "en",
-                                target: "ar"
-                            }
-                        }).then(function(httpResponse) {
-                                var txt = httpResponse.text.replace(/\s+/g, '');
-                                var constTxt = '"translation"';
-                                var k = text.indexOf(constTxt);
-                                var cText = "";
-                                for (var i = k + constTxt.length + 1; i < txt.length; i++) {
-                                    if (txt[i] === '"')
-                                        break;
-                                    cText += txt[i];
-                                }
-                                rText = rText + "," + cText;
-                            },
-                            function(httpResponse) {
-                                console.error('Req failed');
-                            });
-                    }
-                    response.success('كلب');
-                    for (var i = 0; i < results.length; i++) {
-                        results[i].destroy({});
+                        // response.success('كلب');
+                        for (var i = 0; i < results.length; i++) {
+                            results[i].destroy({});
+                        }
                     }
                 },
-                function(httpResponse) {
-                    console.error('Request failed');
+                error: function(error) {
+                    console.error("Query Unsuccessful");
                 });
-        },
-        error: function(error) {
-            console.error("Query Unsuccessful");
+            Parse.Cloud.httpRequest({
+                username: '87b03976-e50a-448f-b505-d681beea1a78',
+                password: 'jlvuC1ye73L3',
+                url: "https://gateway.watsonplatform.net/language-translation/api/v2/translate",
+                method: "POST",
+                params: {
+                    text: rText,
+                    source: "en",
+                    target: "ar"
+                }
+            }).then(function(httpResponse) {
+                    var txt = httpResponse.text.replace(/\s+/g, '');
+                    var constTxt = '"translation"';
+                    var k = text.indexOf(constTxt);
+                    var cText = "";
+                    for (var i = k + constTxt.length + 1; i < txt.length; i++) {
+                        if (txt[i] === '"')
+                            break;
+                        cText += txt[i];
+                    }
+                    rText = rText + "," + cText;
+                    response.success(rText);
+                },
+                function(httpResponse) {
+                    console.error('Req failed');
+                });
         }
     });
 });
