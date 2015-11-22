@@ -26,9 +26,9 @@ Parse.Cloud.define("getPhoto", function(request, response) {
                     outputMode: "json"
                 }
             }).then(function(httpResponse) {
-                response.success(httpResponse);
+                response.success(httpResponse.text);
                 results[0].destroy({});
-            }, function(httpResponse.text) {
+            }, function(httpResponse) {
                 console.error('Request failed');
             });
         },
