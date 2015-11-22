@@ -19,7 +19,7 @@ Parse.Cloud.define("hello", function(request, response) {
 Parse.Cloud.define("getPhoto", function(request, response) {
     var photo = Parse.Object.extend("PhotoObject");
     var query = new Parse.Query(photo);
-    var rText = "";
+
     query.equalTo("ImageKey", "ImageFile");
     query.find({
         success: function(results) {
@@ -33,35 +33,33 @@ Parse.Cloud.define("getPhoto", function(request, response) {
                     outputMode: "json"
                 }
             }).then(function(httpResponse) {
-                    var constText = '"text":'
-                    var text = httpResponse.text.replace(/\s+/g, '');
-                    var n = text.indexOf(constText);
-                    if (n != -1) {
-                        for (var i = n + constText.length + 1; i < text.length; i++) {
-                            if (text[i] === '"')
-                                break;
-                            rText += text[i];
-                        }
+                var constText = '"text":'
+                var text = httpResponse.text.replace(/\s+/g, '');
+                var n = text.indexOf(constText);
+                var rText = "";
+                if (n != -1) {
+                    for (var i = n + constText.length+1; i < text.length; i++) {
+                        if (text[i] === '"')
+                            break;
+                        rText += text[i];
                     }
-                    if (rText.length === 0) {
-                        rText = "N/A";
-                    }
-
-                    if (rText === "N/A") {
-                        rText = rText + "," + rText + "," + rText + "," + rText + "," + rText;
-                    } else {
-                        response.success(rText);
-                        for (var i = 0; i < results.length; i++) {
-                            results[i].destroy({});
-                        }
-
-                    }
-                },
-                error: function(error) {
-                    console.error("Query Unsuccessful");
-                });
+                }
+                if (rText.length === 0) {
+                    rText = "N/A";
+                }
+                response.success(rText);
+                for(var i = 0; i < results.length; i++) {
+                    results[i].destroy({});
+                }
+            }, function(httpResponse) {
+                console.error('Request failed');
+            });
+        },
+        error: function(error) {
+            console.error("Query Unsuccessful");
         }
     });
+
     Parse.Cloud.httpRequest({
         username: '87b03976-e50a-448f-b505-d681beea1a78',
         password: 'jlvuC1ye73L3',
