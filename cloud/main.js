@@ -61,7 +61,7 @@ Parse.Cloud.define("getPhoto", function(request, response) {
                 }
             }).then(function(httpResponse) {
                 response.success(httpResponse.text);
-                results.destroy(results[0]);
+                //results.destroy(results[0]);
             }, function(httpResponse) {
                 console.error('Request failed');
             });
