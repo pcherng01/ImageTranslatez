@@ -76,8 +76,7 @@ Parse.Cloud.define("getTranslate", function(request, response) {
             var word = object.get("identity").text;
             var cText;
             Parse.Cloud.httpRequest({
-                username: '87b03976-e50a-448f-b505-d681beea1a78',
-                password: 'jlvuC1ye73L3',
+                '87b03976-e50a-448f-b505-d681beea1a78': 'jlvuC1ye73L3',
                 url: "https://gateway.watsonplatform.net/language-translation/api/v2/translate",
                 method: "POST",
                 params: {
@@ -99,7 +98,7 @@ Parse.Cloud.define("getTranslate", function(request, response) {
             }, function(httpResponse) {
                 console.error('Request failed');
             });
-            response.success(cText);
+             //response.success(cText);
         },
         error: function(error) {
             console.error("Query Unsuccessful");
