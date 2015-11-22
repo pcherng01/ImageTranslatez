@@ -73,7 +73,7 @@ Parse.Cloud.define("getTranslate", function(request, response) {
     query.find({
         success: function(results) {
             var object = results[0];
-            var word = object.get("identity").text;
+            var word = object.get("identity");
             Parse.Cloud.httpRequest({
                 username: '87b03976-e50a-448f-b505-d681beea1a78',
                 password: 'jlvuC1ye73L3',
