@@ -1,0 +1,10 @@
+{
+  "applications": {
+    "HackUCI": {
+      "applicationId": "jjUntwLykW0OdBtW0A9ha9V0TBQ96oV3rvtQfIbX"
+    },
+    "_default": {
+      "link": "HackUCI"
+    }
+  }
+}
