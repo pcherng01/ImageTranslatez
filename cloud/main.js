@@ -47,5 +47,21 @@ Parse.Cloud.define("getPhoto", function(request, response) {
 });
 
 Parse.Cloud.define("translate", function(request, response) {
+    var src = 'en';
+    var tar = ['ar', 'es', 'fr', 'pt'];
 
+    // we need a query....
+
+    language_translation.translate({
+            text: 'hello',
+            source: ,
+            target: tar[1];
+        },
+        function(err, translation) {
+
+            if (err)
+                console.log(err)
+            else
+                console.log(translation);
+        });
 });
