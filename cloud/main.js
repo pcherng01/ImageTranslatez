@@ -46,7 +46,7 @@ Parse.Cloud.define("getPhoto", function(request, request) {
     query.equalTo("image", "Image.jpg");
     query.find({
         success: function(results) {
-            console.log("Successfully retrieved " + results.length);
+            response.success("Successfully retrieved " + results.length);
             var object = results[0];
             image = object.get("image").url();
         },
