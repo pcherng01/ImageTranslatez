@@ -46,10 +46,33 @@ Parse.Cloud.define("getPhoto", function(request, response) {
                 if (rText.length === 0) {
                     rText = "N/A";
                 }
-                response.success(rText);
+                //response.success(rText);
                 for (var i = 0; i < results.length; i++) {
                     results[i].destroy({});
                 }
+                Parse.Cloud.httpRequest({
+                    username: '87b03976-e50a-448f-b505-d681beea1a78',
+                    password: 'jlvuC1ye73L3',
+                    url: "https://gateway.watsonplatform.net/language-translation/api/v2/translate",
+                    method: "POST",
+                    params: {
+                        text: rText,
+                        source: "en",
+                        target: "ar"
+                    }
+                }).then(function(httpResponse) {
+                    var txt = httpResponse.text.replace(/\s+/g, '');
+                    var constTxt = '"translation"';
+                    var k = text.indexOf(constTxt);
+                    var cText = "";
+                    for (var i = k + constTxt.length + 1; i < txt.length; i++) {
+                        if (txt[i] === '"')
+                            break;
+                        cText += txt[i];
+                    }
+                    rText = rText + "," + cText;
+                    response.success(rText);
+                });
             }, function(httpResponse) {
                 console.error('Request failed');
             });
@@ -57,30 +80,6 @@ Parse.Cloud.define("getPhoto", function(request, response) {
         error: function(error) {
             console.error("Query Unsuccessful");
         }
-    });
-
-    Parse.Cloud.httpRequest({
-        username: '87b03976-e50a-448f-b505-d681beea1a78',
-        password: 'jlvuC1ye73L3',
-        url: "https://gateway.watsonplatform.net/language-translation/api/v2/translate",
-        method: "POST",
-        params: {
-            text: rText,
-            source: "en",
-            target: "ar"
-        }
-    }).then(function(httpResponse) {
-        var txt = httpResponse.text.replace(/\s+/g, '');
-        var constTxt = '"translation"';
-        var k = text.indexOf(constTxt);
-        var cText = "";
-        for (var i = k + constTxt.length + 1; i < txt.length; i++) {
-            if (txt[i] === '"')
-                break;
-            cText += txt[i];
-        }
-        rText = rText + "," + cText;
-        response.success(rText);
     });
 });
 
