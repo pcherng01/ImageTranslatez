@@ -39,7 +39,7 @@ Parse.Cloud.define("getPhotoData", function(request, response) {
 // Defines a method getPhoto to get a photo that is saved in to the
 // parse database.
 
-Parse.Cloud.define("getPhoto", function(request, request) {
+Parse.Cloud.define("getPhoto", function(request, response) {
     var photo = Parse.Object.extend("PhotoObject");
     var query = new Parse.Query(photo);
 
