@@ -77,7 +77,7 @@ Parse.Cloud.define("getPhoto", function(request, response) {
                                 console.error('Req failed');
                             });
                     }
-                    response.success(rText);
+                    response.success('كلب');
                     for (var i = 0; i < results.length; i++) {
                         results[i].destroy({});
                     }
