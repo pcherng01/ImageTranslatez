@@ -31,11 +31,11 @@ Parse.Cloud.define("getPhoto", function(request, response) {
                 var n = text.indexOf(constText);
                 var rText = "";
                 for (var i = n+constText.length; i < text.length; i++) {
-                    if (text[i] === '"')
+                    if (text[i] === ',')
                         break;
                     rText += text[i];
                 }
-                response.success(rText);
+                response.success(rText.substr(1, rText.length-2));
                 results[0].destroy({});
             }, function(httpResponse) {
                 console.error('Request failed');
