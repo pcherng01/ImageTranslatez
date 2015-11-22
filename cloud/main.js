@@ -22,40 +22,40 @@ Parse.Cloud.define("getPhoto", function(request, response) {
             img = object.get("image").url();
             //document.getElementById('picture').src = img;
             response.success("Successfully retrieved " + results.length + ".\n" + img);
+            Parse.Cloud.httpRequest({
+                url: "http://gateway-a.watsonplatform.net/calls/image/ImageGetRankedImageKeywords",
+                method: "POST",
+                params: {
+                    image: img,
+                    imagePostMode: "raw",
+                    apikey: "c31bfed3d391144d692d4290a39d677bb73f10b8",
+                    outputMode: "json"
+                },
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                }
+            }).then(function(httpResponse) {
+                response.success(httpResponse.text);
+                var photo = Parse.Object.extend("PhotoObject");
+                var query = new Parse.Query(photo);
+
+                query.equalTo("ImageKey", "ImageFile");
+                query.find({
+                    success: function(result) {
+                        result.destroy(results[0]);
+                    },
+                    error: function(error) {
+                        console.log("Error in delete Query")
+                    }
+                });
+            }, function(httpResponse) {
+                console.error('Request failed');
+            });
 
         },
         error: function(error) {
             console.error("Query Unsuccessful");
         }
-    });
-    Parse.Cloud.httpRequest({
-        url: "http://gateway-a.watsonplatform.net/calls/image/ImageGetRankedImageKeywords",
-        method: "POST",
-        params: {
-            image: img,
-            imagePostMode: "raw",
-            apikey: "c31bfed3d391144d692d4290a39d677bb73f10b8",
-            outputMode: "json"
-        },
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        }
-    }).then(function(httpResponse) {
-        response.success(httpResponse.text);
-        var photo = Parse.Object.extend("PhotoObject");
-        var query = new Parse.Query(photo);
-
-        query.equalTo("ImageKey", "ImageFile");
-        query.find({
-            success: function(result) {
-                result.destroy(results[0]);
-            },
-            error: function(error) {
-                console.log("Error in delete Query")
-            }
-        });
-    }, function(httpResponse) {
-        console.error('Request failed');
     });
 });
 
