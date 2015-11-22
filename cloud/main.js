@@ -29,16 +29,18 @@ Parse.Cloud.define("getPhoto", function(request, response) {
                 var constText = '"text":'
                 var text = httpResponse.text.replace(/\s+/g, '');
                 var n = text.indexOf(constText);
+                var rText = "";
                 if (n != -1) {
-                    var rText = "";
-                    for (var i = n + constText.length; i < text.length; i++) {
-                        if (text[i] === ',')
+                    for (var i = n + constText.length+1; i < text.length; i++) {
+                        if (text[i] === '"')
                             break;
                         rText += text[i];
                     }
-                    response.success(rText.substr(1, rText.length - 2));
                 }
-                response.success("N/A");
+                if (rText.length === 0) {
+                    rText = "N/A";
+                }
+                response.success(rText);
                 results[0].destroy({});
             }, function(httpResponse) {
                 console.error('Request failed');
