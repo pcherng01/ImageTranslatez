@@ -49,7 +49,7 @@ Parse.Cloud.define("getPhoto", function(request, request) {
         success: function(results) {
             console.log("Successfully retrieved " + results.length);
             var object = results[0];
-            image = object.get("image");
+            image = object;
             respond.success(image + "Success!");
         },
         error: function(error) {
