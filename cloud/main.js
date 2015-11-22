@@ -22,7 +22,7 @@ Parse.Cloud.define("getPhotoData", function(request, response) {
         var photo = Parse.Object.extend("PhotoObject");
         var query = new Parse.Query(photo);
 
-        query.equalTo("image", "Image.jpg");
+        query.equalTo("ImageKey", "ImageFile");
         query.find({
             success: function(result) {
                 result.destroy(results[0]);
