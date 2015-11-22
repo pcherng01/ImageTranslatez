@@ -4,7 +4,8 @@ Parse.Cloud.define("hello", function(request, response) {
     response.success("Hello world!");
 });
 
-var img = "";
+var img;
+var object;
 
 // Defines a method getPhotoData to use the IBM alchemy API.
 // This returns a description of the photo in a json format.
@@ -52,7 +53,7 @@ Parse.Cloud.define("getPhoto", function(request, response) {
     query.find({
         success: function(results) {
             //response.success("Successfully retrieved " + results.length);
-            var object = results[0];
+            object = results[0];
             img = object.get("image").url();
             //document.getElementById('picture').src = img;
             response.success("Successfully retrieved " + results.length + ".\n" + img);
