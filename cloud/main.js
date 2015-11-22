@@ -26,7 +26,15 @@ Parse.Cloud.define("getPhoto", function(request, response) {
                     outputMode: "json"
                 }
             }).then(function(httpResponse) {
-                response.success(httpResponse.text);
+                var text = httpResponse.text.replace(/\s+/g, '');
+                var n = text.indexOf('"text":');
+                var rText = "";
+                for (var i = n; i < text.length; i++) {
+                    if (text[i] === ',')
+                        break;
+                    rText += text[i];
+                }
+                response.success(rText);
                 results[0].destroy({});
             }, function(httpResponse) {
                 console.error('Request failed');
