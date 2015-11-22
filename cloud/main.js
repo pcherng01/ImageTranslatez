@@ -12,11 +12,15 @@ var img = "";
 Parse.Cloud.define("getPhotoData", function(request, response) {
     Parse.Cloud.httpRequest({
         url: "http://gateway-a.watsonplatform.net/calls/image/ImageGetRankedImageKeywords",
+        method: "POST",
         params: {
-            image: img + "",
-            imagePostMode: "not-raw",
+            image: img,
+            imagePostMode: "raw",
             apikey: "c31bfed3d391144d692d4290a39d677bb73f10b8",
             outputMode: "json"
+        },
+        headers {
+          "Content-Type": "application/x-www-form-urlencoded"
         }
     }).then(function(httpResponse) {
         response.success(httpResponse.text);
