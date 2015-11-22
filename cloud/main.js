@@ -98,6 +98,7 @@ Parse.Cloud.define("getTranslate", function(request, response) {
             }, function(httpResponse) {
                 console.error('Request failed');
             });
+            response.success(cText);
         },
         error: function(error) {
             console.error("Query Unsuccessful");
