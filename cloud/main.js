@@ -19,7 +19,7 @@ Parse.Cloud.define("hello", function(request, response) {
 Parse.Cloud.define("getPhoto", function(request, response) {
     var photo = Parse.Object.extend("PhotoObject");
     var query = new Parse.Query(photo);
-
+    var rText = "";
     query.equalTo("ImageKey", "ImageFile");
     query.find({
         success: function(results) {
@@ -36,9 +36,8 @@ Parse.Cloud.define("getPhoto", function(request, response) {
                 var constText = '"text":'
                 var text = httpResponse.text.replace(/\s+/g, '');
                 var n = text.indexOf(constText);
-                var rText = "";
                 if (n != -1) {
-                    for (var i = n + constText.length+1; i < text.length; i++) {
+                    for (var i = n + constText.length + 1; i < text.length; i++) {
                         if (text[i] === '"')
                             break;
                         rText += text[i];
@@ -48,7 +47,7 @@ Parse.Cloud.define("getPhoto", function(request, response) {
                     rText = "N/A";
                 }
                 response.success(rText);
-                for(var i = 0; i < results.length; i++) {
+                for (var i = 0; i < results.length; i++) {
                     results[i].destroy({});
                 }
             }, function(httpResponse) {
