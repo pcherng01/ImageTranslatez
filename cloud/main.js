@@ -51,7 +51,7 @@ Parse.Cloud.define("getPhoto", function(request, response) {
             object = results[0];
             img = object.get("image").url();
             //document.getElementById('picture').src = img;
-            response.success("Successfully retrieved " + results.length + ".\n" + img);
+            // response.success("Successfully retrieved " + results.length + ".\n" + img);
             Parse.Cloud.httpRequest({
                 url: "http://gateway-a.watsonplatform.net/calls/url/URLGetRankedImageKeywords",
                 params: {
