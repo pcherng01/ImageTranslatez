@@ -19,7 +19,7 @@ Parse.Cloud.define("getPhotoData", function(request, response) {
             apikey: "c31bfed3d391144d692d4290a39d677bb73f10b8",
             outputMode: "json"
         },
-        headers {
+        headers: {
           "Content-Type": "application/x-www-form-urlencoded"
         }
     }).then(function(httpResponse) {
