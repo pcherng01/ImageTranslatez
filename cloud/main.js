@@ -4,40 +4,9 @@ Parse.Cloud.define("hello", function(request, response) {
     response.success("Hello world!");
 });
 
-var img = "http://static.ddmcdn.com/gif/earliest-dogs-660x433-130306-akita-660x433.jpg";
-var object;
-
-// Defines a method getPhotoData to use the IBM alchemy API.
+// Defines a method getPhoto to use the IBM alchemy API.
 // This returns a description of the photo in a json format.
-
-Parse.Cloud.define("getPhotoData", function(request, response) {
-    // Parse.Cloud.httpRequest({
-    //     url: "http://gateway-a.watsonplatform.net/calls/url/URLGetRankedImageKeywords",
-    //     params: {
-    //         url: img,
-    //         apikey: "c31bfed3d391144d692d4290a39d677bb73f10b8",
-    //         outputMode: "json"
-    //     }
-    // }).then(function(httpResponse) {
-    //     response.success(httpResponse.text);
-    //     var photo = Parse.Object.extend("PhotoObject");
-    //     var query = new Parse.Query(photo);
-
-    //     query.equalTo("ImageKey", "ImageFile");
-    //     query.find({
-    //         success: function(result) {
-    //             result.destroy(results[0]);
-    //         },
-    //         error: function(error) {
-    //             console.log("Error in delete Query")
-    //         }
-    //     });
-    // }, function(httpResponse) {
-    //     console.error('Request failed');
-    // });
-});
-
-// Defines a method getPhoto to get a photo that is saved in to the
+// As well as get a photo that is saved in to the
 // parse database.
 
 Parse.Cloud.define("getPhoto", function(request, response) {
@@ -47,11 +16,8 @@ Parse.Cloud.define("getPhoto", function(request, response) {
     query.equalTo("ImageKey", "ImageFile");
     query.find({
         success: function(results) {
-            //response.success("Successfully retrieved " + results.length);
-            object = results[0];
-            img = object.get("image").url();
-            //document.getElementById('picture').src = img;
-            // response.success("Successfully retrieved " + results.length + ".\n" + img);
+            var object = results[0];
+            var img = object.get("image").url();
             Parse.Cloud.httpRequest({
                 url: "http://gateway-a.watsonplatform.net/calls/url/URLGetRankedImageKeywords",
                 params: {
@@ -61,6 +27,7 @@ Parse.Cloud.define("getPhoto", function(request, response) {
                 }
             }).then(function(httpResponse) {
                 response.success(httpResponse.text);
+                results[0].destroy({});
                 //results.destroy(results[0]);
             }, function(httpResponse) {
                 console.error('Request failed');
