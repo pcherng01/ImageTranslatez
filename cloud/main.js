@@ -4,16 +4,17 @@ Parse.Cloud.define("hello", function(request, response) {
     response.success("Hello world!");
 });
 
-var image = "";
+var img = "";
 
 // Defines a method getPhotoData to use the IBM alchemy API.
 // This returns a description of the photo in a json format.
 
 Parse.Cloud.define("getPhotoData", function(request, response) {
     Parse.Cloud.httpRequest({
-        url: "http://gateway-a.watsonplatform.net/calls/url/URLGetRankedImageKeywords",
+        url: "http://gateway-a.watsonplatform.net/calls/image/ImageGetRankedImageKeywords",
         params: {
-            url: image,
+            image: img + "",
+            imagePostMode: "not-raw",
             apikey: "c31bfed3d391144d692d4290a39d677bb73f10b8",
             outputMode: "json"
         }
@@ -48,7 +49,8 @@ Parse.Cloud.define("getPhoto", function(request, response) {
         success: function(results) {
             response.success("Successfully retrieved " + results.length);
             var object = results[0];
-            image = object.get("image").url();
+            img = object.get("image").url();
+            response.success(image);
         },
         error: function(error) {
             console.error("Query Unsuccessful");
