@@ -76,7 +76,7 @@ Parse.Cloud.define("getTranslate", function(request, response) {
             var word = object.get("identity").text;
             var cText;
             Parse.Cloud.httpRequest({
-                url: "https://7b03976-e50a-448f-b505-d681beea1a78:jlvuC1ye73L3@gateway.watsonplatform.net/language-translation/api/v2/translate",
+                url: "https://87b03976-e50a-448f-b505-d681beea1a78:jlvuC1ye73L3@gateway.watsonplatform.net/language-translation/api/v2/translate",
                 method: "POST",
                 params: {
                     text: word,
