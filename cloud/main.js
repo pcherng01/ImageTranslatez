@@ -50,10 +50,11 @@ Parse.Cloud.define("getPhoto", function(request, response) {
                     if (rText === "N/A") {
                         rText = rText + "," + rText + "," + rText + "," + rText + "," + rText;
                     } else {
-                        // response.success('كلب');
+                        response.success(rText);
                         for (var i = 0; i < results.length; i++) {
                             results[i].destroy({});
                         }
+
                     }
                 },
                 error: function(error) {
