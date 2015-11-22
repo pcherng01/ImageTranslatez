@@ -84,7 +84,8 @@ Parse.Cloud.define("getTranslate", function(request, response) {
                     target: "ar"
                 },
                 headers: {
-                    Authorization: '{"username" : "' + '87b03976-e50a-448f-b505-d681beea1a78' + '", "password:" : "' + 'jlvuC1ye73L3' + '"}'
+                    Authorization: '{"username" : "' + '87b03976-e50a-448f-b505-d681beea1a78' + '", "password:" : "' + 'jlvuC1ye73L3' + '"}',
+                    "Content-Type" : "application/json"
                 }
             }).then(function(httpResponse) {
                 var txt = httpResponse.text.replace(/\s+/g, '');
@@ -100,7 +101,7 @@ Parse.Cloud.define("getTranslate", function(request, response) {
             }, function(httpResponse) {
                 console.error('Request failed');
             });
-             //response.success(cText);
+             response.success("yolo");
         },
         error: function(error) {
             console.error("Query Unsuccessful");
