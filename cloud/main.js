@@ -74,6 +74,7 @@ Parse.Cloud.define("getTranslate", function(request, response) {
         success: function(results) {
             var object = results[0];
             var word = object.get("identity").text;
+            var cText;
             Parse.Cloud.httpRequest({
                 username: '87b03976-e50a-448f-b505-d681beea1a78',
                 password: 'jlvuC1ye73L3',
@@ -88,7 +89,7 @@ Parse.Cloud.define("getTranslate", function(request, response) {
                 var txt = httpResponse.text.replace(/\s+/g, '');
                 var constTxt = '"translation"';
                 var k = text.indexOf(constTxt);
-                var cText = "";
+                cText = "";
                 for (var i = k + constTxt.length + 1; i < txt.length; i++) {
                     if (txt[i] === '"')
                         break;
@@ -98,7 +99,7 @@ Parse.Cloud.define("getTranslate", function(request, response) {
             }, function(httpResponse) {
                 console.error('Request failed');
             });
-            response.success("SucessIDK");
+            response.success(cText);
         },
         error: function(error) {
             console.error("Query Unsuccessful");
