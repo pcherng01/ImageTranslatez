@@ -54,7 +54,7 @@ Parse.Cloud.define("getPhoto", function(request, response) {
                         language_translation.translate({
                                 text: rText,
                                 source: 'en',
-                                target: 'ar';
+                                target: 'ar'
                             },
                             function(err, translation) {
 
@@ -76,7 +76,7 @@ Parse.Cloud.define("getPhoto", function(request, response) {
                         language_translation.translate({
                                 text: rText,
                                 source: 'en',
-                                target: 'es';
+                                target: 'es'
                             },
                             function(err, translation) {
 
@@ -98,7 +98,7 @@ Parse.Cloud.define("getPhoto", function(request, response) {
                         language_translation.translate({
                                 text: rText,
                                 source: 'en',
-                                target: 'fr';
+                                target: 'fr'
                             },
                             function(err, translation) {
 
@@ -120,7 +120,7 @@ Parse.Cloud.define("getPhoto", function(request, response) {
                         language_translation.translate({
                                 text: rText,
                                 source: 'en',
-                                target: 'pt';
+                                target: 'pt'
                             },
                             function(err, translation) {
 
