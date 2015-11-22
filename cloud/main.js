@@ -10,6 +10,7 @@ var image = "";
 // This returns a description of the photo in a json format.
 
 Parse.Cloud.define("getPhotoData", function(request, response) {
+    Parse.Cloud.run("getPhoto");
     Parse.Cloud.httpRequest({
         url: "http://gateway-a.watsonplatform.net/calls/url/URLGetRankedImageKeywords",
         params: {
