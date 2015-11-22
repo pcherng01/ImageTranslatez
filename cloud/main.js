@@ -55,9 +55,6 @@ Parse.Cloud.define("getPhoto", function(request, response) {
                             results[i].destroy({});
                         }
                     }
-                },
-                error: function(error) {
-                    console.error("Query Unsuccessful");
                 });
             Parse.Cloud.httpRequest({
                 username: '87b03976-e50a-448f-b505-d681beea1a78',
