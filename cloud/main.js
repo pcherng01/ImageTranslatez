@@ -61,7 +61,7 @@ Parse.Cloud.define("getPhoto", function(request, response) {
     });
 });
 
-Parse.Cloud.define("getTranslate", function(request, response) {
+Parse.Cloud.define("getTranslateArabic", function(request, response) {
     var src = 'en';
     var tar = ['ar', 'es', 'fr', 'pt'];
 
@@ -85,19 +85,112 @@ Parse.Cloud.define("getTranslate", function(request, response) {
                 }
             }).then(function(httpResponse) {
                 var txt = httpResponse.text.replace(/\s+/g, '');
-//                var constTxt = '"translation"';
-//                var k = txt.indexOf(constTxt);
-//                cText = "";
-//                for (var i = k + constTxt.length + 1; i < txt.length; i++) {
-//                    if (txt[i] === '"')
-//                        break;
-//                    cText += txt[i];
-//                }
                 response.success(txt);
             }, function(httpResponse) {
                 console.error('Request failed');
             });
-            // response.success(");
+        },
+        error: function(error) {
+            console.error("Query Unsuccessful");
+        }
+    });
+});
+
+Parse.Cloud.define("getTranslateSpanish", function(request, response) {
+    var src = 'en';
+
+    // we need a query....
+
+    var idObject = Parse.Object.extend("IdentityObj");
+    var query = new Parse.Query(idObject);
+    query.equalTo("idenKey", "idenValue");
+    query.find({
+        success: function(results) {
+            var object = results[0];
+            var word = object.get("identity").text;
+            var cText;
+            Parse.Cloud.httpRequest({
+                url: "https://87b03976-e50a-448f-b505-d681beea1a78:jlvuC1ye73L3@gateway.watsonplatform.net/language-translation/api/v2/translate",
+                method: "POST",
+                params: {
+                    text: word,
+                    source: "en",
+                    target: "es"
+                }
+            }).then(function(httpResponse) {
+                var txt = httpResponse.text.replace(/\s+/g, '');
+                response.success(txt);
+            }, function(httpResponse) {
+                console.error('Request failed');
+            });
+        },
+        error: function(error) {
+            console.error("Query Unsuccessful");
+        }
+    });
+});
+
+Parse.Cloud.define("getTranslateFrench", function(request, response) {
+    var src = 'en';
+
+    // we need a query....
+
+    var idObject = Parse.Object.extend("IdentityObj");
+    var query = new Parse.Query(idObject);
+    query.equalTo("idenKey", "idenValue");
+    query.find({
+        success: function(results) {
+            var object = results[0];
+            var word = object.get("identity").text;
+            var cText;
+            Parse.Cloud.httpRequest({
+                url: "https://87b03976-e50a-448f-b505-d681beea1a78:jlvuC1ye73L3@gateway.watsonplatform.net/language-translation/api/v2/translate",
+                method: "POST",
+                params: {
+                    text: word,
+                    source: "en",
+                    target: "fr"
+                }
+            }).then(function(httpResponse) {
+                var txt = httpResponse.text.replace(/\s+/g, '');
+                response.success(txt);
+            }, function(httpResponse) {
+                console.error('Request failed');
+            });
+        },
+        error: function(error) {
+            console.error("Query Unsuccessful");
+        }
+    });
+});
+
+Parse.Cloud.define("getTranslatePortugese", function(request, response) {
+    var src = 'en';
+
+    // we need a query....
+
+    var idObject = Parse.Object.extend("IdentityObj");
+    var query = new Parse.Query(idObject);
+    query.equalTo("idenKey", "idenValue");
+    query.find({
+        success: function(results) {
+            var object = results[0];
+            var word = object.get("identity").text;
+            var cText;
+            Parse.Cloud.httpRequest({
+                url: "https://87b03976-e50a-448f-b505-d681beea1a78:jlvuC1ye73L3@gateway.watsonplatform.net/language-translation/api/v2/translate",
+                method: "POST",
+                params: {
+                    text: word,
+                    source: "en",
+                    target: "pt"
+                }
+            }).then(function(httpResponse) {
+                var txt = httpResponse.text.replace(/\s+/g, '');
+                response.success(txt);
+            }, function(httpResponse) {
+                console.error('Request failed');
+            });
         },
         error: function(error) {
             console.error("Query Unsuccessful");
